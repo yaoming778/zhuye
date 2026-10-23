@@ -1,195 +1,312 @@
-<html lang="en" class="sr js"><head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>大熊云</title>
-    <link href="https://fonts.googleapis.com/css?family=Oxygen:400,700|Arimo:400,700" rel="stylesheet">
-    <link rel="stylesheet" href="dist/css/style.css">
-    <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大熊云 - 优质网络服务平台</title>
+    <style>
+        /* 基础重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 头部 */
+        header {
+            padding: 30px 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-main);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* 核心英雄区 */
+        .hero {
+            padding: 100px 0 80px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(59,130,246,0.15) 0%, rgba(15,23,42,0) 70%);
+            z-index: -1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        /* 业务服务区 */
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 50px;
+        }
+
+        .services {
+            padding: 60px 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            padding: 40px 30px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 12px;
+            color: var(--accent);
+        }
+
+        .icon svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* 底部 */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 80px;
+        }
+
+        footer a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: var(--accent);
+        }
+
+        /* 滚动动画 */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 手机端适配 */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero { padding: 60px 0; }
+        }
+    </style>
 </head>
-<body class="is-boxed has-animations" style="height: 100%;">
-    <div class="body-wrap boxed-container">
-        <header class="site-header">
-            <div class="container">
-                <div class="site-header-inner">
-                    <div class="brand header-brand">
-                        <h1 class="m-0">
-                            <a href="https://www.aiqqzy.com/">
-                                
-                            </a>
-                        </h1>
+<body>
+
+    <header class="container reveal">
+        <a href="#" class="logo">
+            <!-- 内联 SVG 图标 -->
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+            大熊云
+        </a>
+    </header>
+
+    <main>
+        <!-- 顶部横幅 -->
+        <section class="hero container reveal">
+            <h1>大熊云</h1>
+            <p>努力打造为全国网络爱好者提供优质服务的平台，让我们的生活更加精彩！本站接受网站源码，软件，APP，等定制。</p>
+            <!-- QQ 联系链接保留原版 -->
+            <a href="tencent://message/?uin=3444238023&Site=&Menu=yes" class="btn">立即联系客服</a>
+        </section>
+
+        <!-- 业务分类 -->
+        <section class="services container">
+            <h2 class="section-title reveal">定制服务</h2>
+            <div class="grid">
+                
+                <!-- 卡片 1 -->
+                <div class="card reveal">
+                    <div class="icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                        </svg>
                     </div>
+                    <h3>网络软件</h3>
+                    <p>PC端软件定制，请具体说明软件需要的功能。</p>
                 </div>
+
+                <!-- 卡片 2 -->
+                <div class="card reveal">
+                    <div class="icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="16 18 22 12 16 6"></polyline>
+                            <polyline points="8 6 2 12 8 18"></polyline>
+                        </svg>
+                    </div>
+                    <h3>网站源码</h3>
+                    <p>详细说明PHP版本，数据库版本，打包源码还是安装程序！</p>
+                </div>
+
+                <!-- 卡片 3 -->
+                <div class="card reveal">
+                    <div class="icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                    </div>
+                    <h3>小程序</h3>
+                    <p>请具体说明小程序需要的功能，我们将为您量身定制。</p>
+                </div>
+
+                <!-- 卡片 4 -->
+                <div class="card reveal">
+                    <div class="icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                            <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                        </svg>
+                    </div>
+                    <h3>APP</h3>
+                    <p>安卓软件定制，请说明软件需要的具体功能需求。</p>
+                </div>
+
             </div>
-        </header>
+        </section>
+    </main>
 
-        <main>
-            <section class="hero">
-				<div class="hero-left-decoration is-revealing" style="visibility: visible;"></div>
-				<div class="hero-right-decoration is-revealing" style="visibility: visible;"></div>
-                <div class="container">
-                    <div class="hero-inner">
-						<div class="hero-copy">
-	                        <h1 class="hero-title mt-0 is-revealing" style="visibility: visible;">大熊云</h1>
-	                        <p class="hero-paragraph is-revealing" style="visibility: visible;">大熊云。努力打造为全国网络爱好者提供优质服务的平台，让我们的生活更加精彩！</p>
-	                        <p class="hero-cta mb-0 is-revealing" style="visibility: visible;">
-								<a class="button button-primary button-shadow" href="tencent://message/?uin=3444238023&amp;Site=&amp;Menu=yes">立即联系</a>
-							</p>
-						</div>
-						<div class="hero-illustration">
-						</div>
-                    </div>
-                </div>
-            </section>
+    <footer class="container reveal">
+        <p>© 2024 大熊云 - <a href="https://beian.miit.gov.cn/" target="_blank">鄂ICP备2026026873号-24</a></p>
+    </footer>
 
-            <section class="clients section">
-                <div class="container">
-                    <div class="clients-inner section-inner has-top-divider">
-                        <div class="container-sm">
-                            <ul class="list-reset mb-0">
-                                <li class="is-revealing" style="visibility: visible;">
-                                    <img src="dist/images/mac.png" alt="苹果系统软件">
-                                </li>
-                                <li class="is-revealing" style="visibility: visible;">
-                                    <img src="dist/images/Android.png" alt="安卓系统软件">
-                                </li>
-                                <li class="is-revealing" style="visibility: visible;">
-                                    <img src="dist/images/code.png" alt="源代码">
-                                </li>
-                                <li class="is-revealing" style="visibility: visible;">
-                                    <img src="dist/images/microsoft-logo.svg" alt="微软系统软件">
-                                </li>
-								<li class="is-revealing" style="visibility: visible;">
-									<img src="dist/images/game.png" alt="游戏">
-								</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
+    <!-- 原生 JS 实现滚动动画，不依赖任何外部库 -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const reveals = document.querySelectorAll(".reveal");
 
-			<section class="features section text-center">
-                <div class="container">
-                    <div class="features-inner section-inner has-top-divider">
-						<div class="features-header text-center">
-							<div class="container-sm">
-								<h2 class="section-title mt-0">声明</h2>
-								<p class="section-paragraph mb-0">本站接受网站源码，软件，APP，等定制</p>
-							</div>
-						</div>
-                        <div class="features-wrap">
-                            <div class="feature is-revealing" style="visibility: visible;">
-                                <div class="feature-inner">
-                                    <div class="feature-icon">
-                                        <img src="dist/images/feature-icon-01.svg" alt="Feature 01">
-                                    </div>
-                                    <h4 class="feature-title">网络软件</h4>
-                                    <p class="text-sm">PC端软件，请具体说明软件需要的功能</p>
-                                </div>
-                            </div>
-                            <div class="feature is-revealing" style="visibility: visible;">
-                                <div class="feature-inner">
-                                    <div class="feature-icon">
-                                        <img src="dist/images/feature-icon-02.svg" alt="Feature 02">
-                                    </div>
-                                    <h4 class="feature-title">网站源码</h4>
-                                    <p class="text-sm">详细说明PHP版本，数据库版本，打包源码还是安装程序！</p>
-                                </div>
-                            </div>
-                            <div class="feature is-revealing" style="visibility: visible;">
-                                <div class="feature-inner">
-                                    <div class="feature-icon">
-                                        <img src="dist/images/feature-icon-03.svg" alt="Feature 03">
-                                    </div>
-                                    <h4 class="feature-title">小程序</h4>
-                                    <p class="text-sm">请具体说明小程序需要的功能</p>
-                                </div>
-                            </div>
-                            <div class="feature is-revealing" style="visibility: visible;">
-                                <div class="feature-inner">
-                                    <div class="feature-icon">
-                                        <img src="dist/images/feature-icon-04.svg" alt="Feature 04">
-                                    </div>
-                                    <h4 class="feature-title">APP</h4>
-                                    <p class="text-sm">安卓软件，请说明软件需要的功能</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            const revealOnScroll = () => {
+                const windowHeight = window.innerHeight;
+                const elementVisible = 100;
 
+                reveals.forEach((reveal) => {
+                    const elementTop = reveal.getBoundingClientRect().top;
+                    if (elementTop < windowHeight - elementVisible) {
+                        reveal.classList.add("active");
+                    }
+                });
+            };
 
-			<section class="features-tabs section">
-                <div class="container">
-                    <div class="features-tabs-inner section-inner has-top-divider">
-						<div class="tabs-container">
-							<ul class="tabs-links">
-								<li class="is-revealing" style="visibility: visible;">
-									<a href="#tab-1" class="tab-link">
-										<img src="dist/images/tabs-icon-01.svg" alt="Tabs icon 01">
-										<span class="h4 m-0">其他</span>
-									</a>
-								</li>
-								<li class="is-revealing" style="visibility: visible;">
-									<a href="#tab-2" class="tab-link">
-										<img src="dist/images/tabs-icon-02.svg" alt="Tabs icon 02">
-										<span class="h4 m-0">待定</span>
-									</a>
-								</li>
-								<li class="is-revealing" style="visibility: visible;">
-									<a href="#tab-3" class="tab-link is-active">
-										<img src="dist/images/tabs-icon-03.svg" alt="Tabs icon 03">
-										<span class="h4 m-0">待定</span>
-									</a>
-								</li>
-							</ul>
-							<div class="tabs-content">
-								<div id="tab-1" class="tab-panel">
-									<h2>其他</h2>
-									<p>可以联系客服详细说明需求</p>
-									<p class="mb-0">可以将您的需求告知客服，让我们更好的为您服务</p>
-								</div>
-								<div id="tab-2" class="tab-panel">
-									<h2>待定</h2>
-									<p>待定</p>
-									<p class="mb-0">待定</p>
-								</div>
-								<div id="tab-3" class="tab-panel is-active">
-									<h2>待定</h2>
-									<p>待定</p>
-									<p class="mb-0">待定</p>
-								</div>
-							</div>
-						</div>
-                    </div>
-                </div>
-            </section>
-			<section class="cta section">
-				<div class="container">
-					<div class="cta-inner section-inner is-revealing" style="visibility: visible;">
-						<h3 class="section-title mt-0">还在犹豫什么呢老弟?</h3>
-						<div class="cta-cta">
-							<a class="button button-primary button-shadow" href="tencent://message/?uin=1442682171&amp;Site=&amp;Menu=yes&quot;">立即联系</a>
-						</div>
-					</div>
-				</div>
-			</section>
-        </main>
-
-        <footer class="site-footer">
-            <div class="container">
-                <div class="site-footer-inner">
-                    
-                    
-                    
-                    <div class="footer-copyright">© 2024 大熊云    - <a href="https://beian.miit.gov.cn/" target="_blank">鄂ICP备2026026873号-24</a></div>
-                </div>
-            </div>
-        </footer>
-    </div>
-
-    <script src="dist/js/main.min.js"></script>
-
-
-</body></html>
+            window.addEventListener("scroll", revealOnScroll);
+            // 页面加载时先执行一次
+            revealOnScroll();
+        });
+    </script>
+</body>
+</html>
